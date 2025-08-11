@@ -6,11 +6,13 @@ import { CategoryCard } from "@/components/CategoryCard"
 import { ToolCard } from "@/components/ToolCard"
 import { SearchFilters } from "@/components/SearchFilters"
 import { ToolModal } from "@/components/ToolModal"
+import { SubmitToolModal } from "@/components/SubmitToolModal"
 import { categories, tools, getFeaturedTools, getAllTags, searchTools, type Tool } from "@/data/aiTools"
 
 const Index = () => {
   const [selectedTool, setSelectedTool] = useState<Tool | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isSubmitModalOpen, setIsSubmitModalOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState("")
   const [selectedCategory, setSelectedCategory] = useState("")
   const [selectedPricing, setSelectedPricing] = useState<string[]>([])
@@ -81,7 +83,7 @@ const Index = () => {
               <Badge variant="outline" className="hidden md:flex">
                 {tools.length}+ Tools
               </Badge>
-              <Button variant="glow" size="sm">
+              <Button variant="glow" size="sm" onClick={() => setIsSubmitModalOpen(true)}>
                 Submit Tool
               </Button>
             </div>
@@ -251,6 +253,12 @@ const Index = () => {
           setIsModalOpen(false)
           setSelectedTool(null)
         }}
+      />
+
+      {/* Submit Tool Modal */}
+      <SubmitToolModal 
+        isOpen={isSubmitModalOpen}
+        onClose={() => setIsSubmitModalOpen(false)}
       />
 
       {/* Footer */}
